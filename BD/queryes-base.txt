@@ -1,0 +1,38 @@
+DROP DATABASE AppRestaurante;
+CREATE DATABASE AppRestaurante;
+USE AppRestaurante;
+
+CREATE TABLE Products(
+	ID INT NOT NULL  AUTO_INCREMENT,
+    productName varchar(255) NOT NULL,
+    price INT,
+    PRIMARY KEY(ID)
+    );
+
+CREATE TABLE Customers(
+	ID INT NOT NULL AUTO_INCREMENT,
+    firstName varchar(255) NOT NULL,
+    lastName varchar(255) NOT NULL,
+    phoneNumber varchar(20) NOT NULL,
+    adress varchar(255) NOT NULL,
+    district varchar(255) NOT NULL,
+    
+    PRIMARY KEY(ID));
+
+CREATE TABLE Sales(
+	ID INT NOT NULL AUTO_INCREMENT,
+    clientID INT NOT NULL,
+    payment varchar(25),
+    `date` datetime,
+    
+    PRIMARY KEY(ID),
+    FOREIGN KEY(clientID) REFERENCES Customers(ID));
+    
+CREATE TABLE ProductSales(
+	ID INT NOT NULL AUTO_INCREMENT,
+    saleID INT NOT NULL,
+    productID INT NOT NULL,
+    
+	PRIMARY KEY(ID),
+	FOREIGN KEY(saleID) REFERENCES Sales(ID),
+	FOREIGN KEY(productID) REFERENCES Products(ID));
